@@ -6,11 +6,17 @@ import DiceThree from "../../assets/images/Three.png";
 import DiceFour from "../../assets/images/Four.png";
 import DiceFive from "../../assets/images/Five.png";
 import DiceSix from "../../assets/images/Six.png";
+import * as Haptics from 'expo-haptics';
 
 type DiceProps = {
   imageUrl: ImageSourcePropType,
   animatedStyle: any
 }
+
+const options = {
+  enableVibrateFallback: true,
+  ignoreAndroidSystemSettings: false,
+};
 
 const Dice = ({ imageUrl, animatedStyle }: DiceProps): JSX.Element => {
   return (
@@ -36,6 +42,7 @@ export default function HomePage(): JSX.Element {
       case 5: setDiceImg(DiceFive); break;
       case 6: setDiceImg(DiceSix); break;
     }
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
 
     Animated.timing(rotation, {
       toValue: 1,
@@ -108,4 +115,5 @@ const styles = StyleSheet.create({
   lightText: {
     color: '#000000',
   },
+  
 });
